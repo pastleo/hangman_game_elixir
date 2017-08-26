@@ -14,8 +14,10 @@ defmodule Hangman.Game do
   end
   
   def new_game() do
-    new_game(Dic.random)
+    new_game(Dic.start |> Dic.random)
   end
+
+
 
   def move(game = %Hangman.Game{ game_state: :won }, _guess) do
     game
@@ -39,6 +41,7 @@ defmodule Hangman.Game do
       state: game.game_state,
       left_turns: game.left_turns,
       letters: game.letters |> reveal_guessed(game.used),
+      used: game.used,
     }
   end
 
