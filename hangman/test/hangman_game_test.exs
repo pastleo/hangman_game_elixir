@@ -103,4 +103,12 @@ defmodule HangmanTest do
     assert tally.left_turns == 6
     assert tally.letters == ["a", "_", "_", "_"]
   end
+
+  test "move_with_tally" do
+    game =
+      Game.new_game("asdf")
+      |> Game.move("a")
+    game_next = Game.move(game, "x")
+    assert Game.move_with_tally(game, "x") == { game_next, Game.tally(game_next) }
+  end
 end

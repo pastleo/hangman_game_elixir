@@ -14,20 +14,18 @@ defmodule Hangman.Game do
   end
   
   def new_game() do
-    new_game(Dic.start |> Dic.random)
+    new_game(Dic.random())
   end
 
-
-
-  def move(game = %Hangman.Game{ game_state: :won }, _guess) do
-    game
+  def move_with_tally(game, guess) do
+    move(game, guess)
+    |> (&{ &1, tally(&1) }).()
   end
 
-  def move(game = %Hangman.Game{ game_state: :lose }, _guess) do
-    game
-  end
+  def move(game = %Hangman.Game{ game_state: :won }, _guess), do: game
+  def move(game = %Hangman.Game{ game_state: :lose }, _guess), do: game
   
-  def move(game, guess) do
+  def move(game, guess) when is_binary(guess) do
     accept_move(
       game,
       guess,
@@ -35,6 +33,8 @@ defmodule Hangman.Game do
       MySet.member?(game.used, guess)
     )
   end
+
+  def move(game, _guess), do: game
 
   def tally(game) do
     %{
