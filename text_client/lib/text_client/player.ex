@@ -40,7 +40,6 @@ defmodule TextClient.Player do
 
   defp bye(msg) do
     IO.puts(msg)
-    exit(:normal)
   end
 
 end

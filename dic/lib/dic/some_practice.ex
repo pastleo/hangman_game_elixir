@@ -14,7 +14,7 @@ defmodule Dic.SomePractice do
   def len([]), do: 0
   def len([_|t]), do: 1 + len(t)
 
-  def map([], func), do: []
+  def map([], _func), do: []
   def map([h|t], func), do: [func.(h) | map(t, func)]
 
   def sum_pairs([]), do: []
