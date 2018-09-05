@@ -40,7 +40,7 @@ defmodule Hangman.Game do
     %{
       state: game.game_state,
       left_turns: game.left_turns,
-      letters: game.letters |> reveal_guessed(game.used),
+      letters: game.letters |> reveal_guessed(game.used, game.game_state),
       used: game.used,
     }
   end
@@ -90,19 +90,9 @@ defmodule Hangman.Game do
   defp may_won(true), do: :won
   defp may_won(_),    do: :good_guess
 
-  #defp reveal_guessed([ cur | left], used) do
-    #if MySet.member?(used, cur) do
-      #[ cur | reveal_guessed(left, used) ]
-    #else
-      #[ "_" | reveal_guessed(left, used) ]
-    #end
-  #end
-  
-  #defp reveal_guessed([], _used) do
-    #[]
-  #end
-
-  defp reveal_guessed(letters, used) do
+  defp reveal_guessed(letters, _used, :lose), do: letters
+  defp reveal_guessed(letters, _used, :won), do: letters
+  defp reveal_guessed(letters, used, _state) do
     letters
     |> Enum.map(fn letter -> reveal_letter(letter, MySet.member?(used, letter)) end)
   end
