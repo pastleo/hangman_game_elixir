@@ -1,7 +1,6 @@
 <h1><%= hangman_info(@tally.state) %></h1>
-<p>Letters: <%= letters(@tally.letters) %></p>
-<p>Left: <%= @tally.left_turns %></p>
-<p>You have guessed: <%= letters(@tally.used) %></p>
+<%= render "_game_state.html", tally: @tally %>
+<%= render "_gallows.html", left: @tally.left_turns %>
 
 <%= form_for @conn, hangman_path(@conn, :create), [as: :move, method: :post], fn f -> %>
   <%= submit("new game") %>

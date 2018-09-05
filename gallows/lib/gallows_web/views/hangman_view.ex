@@ -13,4 +13,7 @@ defmodule GallowsWeb.HangmanView do
   defp hangman_info(:already_used), do: "Already used"
   defp hangman_info(:guess_isnt_valid), do: "Not valid input"
 
+  defp turn(left, target) when left <= target, do: "opacity: 1"
+  defp turn(left, target), do: "opacity: 0.25"
+
 end

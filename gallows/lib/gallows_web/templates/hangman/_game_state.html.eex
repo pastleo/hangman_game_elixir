@@ -1,0 +1,3 @@
+<p>Letters: <%= letters(@tally.letters) %></p>
+<p>Left: <%= @tally.left_turns %></p>
+<p>You have guessed: <%= letters(@tally.used) %></p>
