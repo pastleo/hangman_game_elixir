@@ -1,0 +1,8 @@
+<h1>Hello Hangman!</h1>
+
+<%#= button("Start game", to: hangman_path(@conn, :create)) does not work maybe because I use --no-brunch when creating the project %>
+<form action='<%= hangman_path(@conn, :create) %>' method='post'>
+  <input type='hidden' name='_csrf_token' value='<%= Plug.CSRFProtection.get_csrf_token() %>'>
+  <button type="submit">Start game</button>
+</form>
+
